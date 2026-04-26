@@ -3,7 +3,7 @@
 Simulates FIFO and SJF (non-preemptive) CPU scheduling algorithms on 500 processes found in (input_data)[https://github.com/cdona005/cs471_project/blob/main/CPUSCHED/input_data/Datafile1-txt.txt]. 
 
 
-## Compile
+## Compile (from root)
 To compile, run:
 
 ```bash

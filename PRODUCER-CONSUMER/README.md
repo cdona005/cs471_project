@@ -3,7 +3,7 @@
 Simulates the Producer-Consumer problem using threads and semaphores.
 Producers generate random sales records into a shared buffer; consumers read them. 
 
-## Compile
+## Compile (from root)
 To compile, run:
 ```bash
 cd PRODUCER-CONSUMER
