@@ -1,10 +1,13 @@
 # CPU Scheduler Simulation
 
-Simulates FIFO and SJF (non-preemptive) CPU scheduling algorithms on 500 processes found in (input_data)[]. 
+Simulates FIFO and SJF (non-preemptive) CPU scheduling algorithms on 500 processes found in (input_data)[https://github.com/cdona005/cs471_project/blob/main/CPUSCHED/input_data/Datafile1-txt.txt]. 
+
 
 ## Compile
 To compile, run:
+
 ```bash
+cd CPUSCHED
 javac cpu_scheduler.java
 ```
 
@@ -19,6 +22,6 @@ java cpu_scheduler
 
 ## Output
 
-- Prints FIFO and SJF statistics to `output_data/cpu_output.txt`
+- Prints FIFO and SJF statistics to [output_data/cpu_output.txt](https://github.com/cdona005/cs471_project/blob/main/CPUSCHED/output_data/cpu_output.txt)
 - Statistics include: total elapsed time, throughput, CPU utilization,
   average waiting time, average turnaround time, average response time
