@@ -1,2 +1,0 @@
-# cs471_project
-

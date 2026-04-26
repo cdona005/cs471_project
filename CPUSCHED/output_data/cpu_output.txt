@@ -1,0 +1,19 @@
+Loaded 500 processes.
+
+----------- FIFO Statistics -----------
+Number of processes:        500
+Total elapsed time:         14734
+Throughput:                 21.1160
+CPU utilization:            71.66%
+Average waiting time:       17.88
+Average turnaround time:    39.00
+Average response time:      17.88
+
+========== SJF Statistics ==========
+Number of processes:        500
+Total elapsed time:         14734
+Throughput:                 21.1160
+CPU utilization:            71.66%
+Average waiting time:       14.24
+Average turnaround time:    35.36
+Average response time:      14.24

@@ -1,0 +1,133 @@
+Starting: 5 producers, 5 consumers, buffer size 10
+
+--- Consumer 4 Local Statistics ---
+Items consumed: 203
+Local aggregate: $108906.21
+  Store 1: $19301.63
+  Store 2: $27700.19
+  Store 3: $19814.89
+  Store 4: $23672.85
+  Store 5: $18416.65
+  Jan: $6578.78
+  Feb: $12305.22
+  Mar: $7236.73
+  Apr: $13125.05
+  May: $11167.97
+  Jun: $6647.53
+  Jul: $11129.89
+  Aug: $11315.32
+  Sep: $7312.03
+  Oct: $9515.92
+  Nov: $6750.91
+  Dec: $5820.86
+
+--- Consumer 2 Local Statistics ---
+Items consumed: 203
+Local aggregate: $104724.48
+  Store 1: $23914.65
+  Store 2: $18196.00
+  Store 3: $18926.65
+  Store 4: $19804.73
+  Store 5: $23882.45
+  Jan: $10126.74
+  Feb: $11354.94
+  Mar: $9850.39
+  Apr: $7856.71
+  May: $7460.79
+  Jun: $4514.74
+  Jul: $8975.66
+  Aug: $11090.24
+  Sep: $5804.32
+  Oct: $8677.23
+  Nov: $15448.31
+  Dec: $3564.42
+
+--- Consumer 3 Local Statistics ---
+Items consumed: 195
+Local aggregate: $100599.99
+  Store 1: $16461.10
+  Store 2: $23230.68
+  Store 3: $22235.50
+  Store 4: $18524.98
+  Store 5: $20147.74
+  Jan: $5794.34
+  Feb: $10078.25
+  Mar: $10788.07
+  Apr: $7429.73
+  May: $6954.59
+  Jun: $6767.89
+  Jul: $6031.01
+  Aug: $9351.46
+  Sep: $10056.61
+  Oct: $12383.35
+  Nov: $10257.25
+  Dec: $4707.45
+
+--- Consumer 1 Local Statistics ---
+Items consumed: 201
+Local aggregate: $105675.60
+  Store 1: $26282.46
+  Store 2: $19604.55
+  Store 3: $19863.61
+  Store 4: $17770.44
+  Store 5: $22154.53
+  Jan: $6222.51
+  Feb: $9276.48
+  Mar: $10134.82
+  Apr: $11169.81
+  May: $9095.46
+  Jun: $8084.69
+  Jul: $6641.93
+  Aug: $7340.68
+  Sep: $11419.07
+  Oct: $10092.28
+  Nov: $9568.46
+  Dec: $6629.41
+
+--- Consumer 5 Local Statistics ---
+Items consumed: 198
+Local aggregate: $94349.97
+  Store 1: $16424.62
+  Store 2: $15290.49
+  Store 3: $19011.98
+  Store 4: $24578.45
+  Store 5: $19044.43
+  Jan: $11516.63
+  Feb: $8270.91
+  Mar: $9465.35
+  Apr: $4236.65
+  May: $3870.67
+  Jun: $9414.24
+  Jul: $6711.72
+  Aug: $6187.40
+  Sep: $6916.74
+  Oct: $7564.61
+  Nov: $9777.53
+  Dec: $10417.52
+
+========== Global Statistics ==========
+Producers: 5  |  Consumers: 5
+Total items produced:  1000
+Total simulation time: 5182 ms
+Aggregate sales:       $514256.25
+
+Store-wide total sales:
+  Store 1: $102384.46
+  Store 2: $104021.91
+  Store 3: $99852.63
+  Store 4: $104351.46
+  Store 5: $103645.79
+
+Month-wise total sales:
+  Jan: $40239.00
+  Feb: $51285.80
+  Mar: $47475.35
+  Apr: $43817.95
+  May: $38549.49
+  Jun: $35429.09
+  Jul: $39490.21
+  Aug: $45285.09
+  Sep: $41508.77
+  Oct: $48233.38
+  Nov: $51802.46
+  Dec: $31139.65
