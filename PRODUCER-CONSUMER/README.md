@@ -1,4 +1,4 @@
-# CPU Scheduler Simulation
+# Producer-Consumer Simulation
 
 Simulates the Producer-Consumer problem using threads and semaphores.
 Producers generate random sales records into a shared buffer; consumers read them. 
@@ -45,3 +45,15 @@ Randomly generated sales records per producer:
 - `empty` — tracks available empty buffer slots (blocks producers when full)
 - `full` — tracks filled buffer slots (blocks consumers when empty)
 - `statsMutex` — mutual exclusion when consumers write to global statistics
+
+## Simulation Results
+
+| Producers / Consumers | c = 2 | c = 5 | c = 10 |
+| --------------------- | ----- | ----- | ------ |
+| **p = 2** |  12610 ms | 12878 ms |  12553 ms |
+| **p = 5** | 5178 ms | 5182 ms | 5158 ms |
+| **p = 10** | 2537 ms | 2586 ms | 2614 ms | 
+
+## Analysis
+Effect of producers: Increasing the number of producers dramatically reduces simulation time. Going from p=2 to p=10 reduces runtime by about 5x because more threads are generated, making the program reach the 1000 item target more quickly.
+Effect of consumers: The number of consumers makes very little difference with runtime. Producers are the bottleneck because of the 5-40ms sleep between records, while consumers are always read to consume. 

@@ -1,4 +1,14 @@
-
+/* Producer-Consumer Problem Implementation
+This Java program simulates the classic producer-consumer problem using multiple producer and consumer threads, a circular buffer, and semaphores for synchronization. The producers generate sales records with random data and place them in a shared buffer, while the consumers retrieve these records and compute local statistics. The program also maintains global statistics that are updated by the consumers at the end of their execution.
+Key features:
+- Circular buffer of fixed size to hold sales records.
+- Semaphores for mutual exclusion (mutex) and to track empty and full slots in the buffer.
+- Atomic integer to track the total number of items produced across all producers.
+- Each producer generates sales records until a total of 1000 items have been produced.
+- Each consumer retrieves records from the buffer until it receives a termination signal (empty buffer after producers finish).
+- Consumers compute local statistics (total sales, store-wise sales, month-wise sales) and merge them into global statistics at the end.
+- The program outputs local statistics for each consumer and global statistics at the end.
+*/
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,13 +23,13 @@ public class producer_consumer {
     static SalesRecord[] buffer = new SalesRecord[BUFFER_SIZE];
     static int in = 0, out = 0;
 
-    // SEMAPHORES — mutual exclusion and buffer slot tracking
+    // semaphores — mutual exclusion and buffer slot tracking
     static Semaphore mutex = new Semaphore(1); // mutual exclusion on buffer
     static Semaphore empty = new Semaphore(BUFFER_SIZE); // tracks empty slots
     static Semaphore full = new Semaphore(0); // tracks filled slots
     static Semaphore statsMutex = new Semaphore(1); // mutual exclusion on global stats
 
-    // SHARED VARIABLE — total items produced across all producers
+    // shared variable — total items produced across all producers
     static AtomicInteger totalProduced = new AtomicInteger(0);
 
     // Global statistics (merged from consumers at end)
@@ -34,24 +44,25 @@ public class producer_consumer {
             System.out.println("Usage: java PRODUCERCONSUMER.producer_consumer <numProducers> <numConsumers>");
             return;
         }
-
         int p = Integer.parseInt(args[0]);
         int c = Integer.parseInt(args[1]);
-
+        // Redirect output to file based on input parameters
         PrintStream fileOut = new PrintStream(new File("output_data/pc_p" + p + "_c" + c + ".txt"));
         System.setOut(fileOut);
+        // Initialize store-wide sales array based on number of producers (stores)
         storeWideSales = new double[p + 1]; // index 1..p
 
         System.out.println("Starting: " + p + " producers, " + c + " consumers, buffer size " + BUFFER_SIZE);
         startTime = System.currentTimeMillis();
-
+        // Create and start producer and consumer threads
         Thread[] producers = new Thread[p];
         Thread[] consumers = new Thread[c];
-
+        // Start consumers first so they are waiting on the buffer when producers start producing
         for (int i = 0; i < c; i++) {
             consumers[i] = new Thread(new Consumer(i + 1, p));
             consumers[i].start();
         }
+        // Start producers
         for (int i = 0; i < p; i++) {
             producers[i] = new Thread(new Producer(i + 1));
             producers[i].start();
@@ -69,7 +80,7 @@ public class producer_consumer {
 
         for (Thread t : consumers)
             t.join();
-
+        // All threads have finished, print global statistics
         long totalTime = System.currentTimeMillis() - startTime;
 
         String[] months = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
@@ -88,11 +99,10 @@ public class producer_consumer {
             System.out.printf("  %s: $%.2f%n", months[i], monthWiseSales[i]);
     }
 
-    // ===================== SalesRecord =====================
     static class SalesRecord {
         int dd, mm, yy, storeId, registerNum;
         double saleAmount;
-
+        // Constructor to initialize a sales record with date, store ID, register number, and sale amount
         SalesRecord(int dd, int mm, int yy, int storeId, int registerNum, double saleAmount) {
             this.dd = dd;
             this.mm = mm;
@@ -103,18 +113,18 @@ public class producer_consumer {
         }
     }
 
-    // ===================== Producer =====================
     static class Producer implements Runnable {
+        // Each producer is associated with a specific store ID and generates sales records for that store
         int storeId;
         Random rand = new Random();
 
         Producer(int storeId) {
             this.storeId = storeId;
         }
-
+        // The producer thread continuously generates sales records until the total number of produced items reaches MAX_ITEMS
         public void run() {
             while (true) {
-                // Atomically claim the next production slot — SHARED VARIABLE access
+                // Atomically claim the next production slot — shared variable access
                 int count = totalProduced.incrementAndGet();
                 if (count > MAX_ITEMS)
                     break; // 1000 items claimed, stop
@@ -126,12 +136,12 @@ public class producer_consumer {
                 SalesRecord rec = new SalesRecord(dd, mm, 16, storeId, registerNum, amount);
 
                 try {
-                    empty.acquire(); // SEMAPHORE: wait for an empty slot
-                    mutex.acquire(); // SEMAPHORE: lock buffer for mutual exclusion
+                    empty.acquire(); // semaphore: wait for an empty slot
+                    mutex.acquire(); // semaphore: lock buffer for mutual exclusion
                     buffer[in] = rec;
                     in = (in + 1) % BUFFER_SIZE;
-                    mutex.release(); // SEMAPHORE: release buffer lock
-                    full.release(); // SEMAPHORE: signal that a new item is available
+                    mutex.release(); // semaphore: release buffer lock
+                    full.release(); // semaphore: signal that a new item is available
 
                     Thread.sleep(rand.nextInt(36) + 5); // sleep 5-40 ms
                 } catch (InterruptedException e) {
@@ -142,7 +152,6 @@ public class producer_consumer {
         }
     }
 
-    // ===================== Consumer =====================
     static class Consumer implements Runnable {
         int consumerId, numProducers;
         double[] localStoreSales;
@@ -157,7 +166,7 @@ public class producer_consumer {
         }
 
         public void run() {
-            // ---- consuming loop ----
+            // consuming loop — runs until it receives a termination signal (empty buffer after producers finish)
             while (true) {
                 try {
                     full.acquire(); // SEMAPHORE: wait for an item
@@ -169,8 +178,8 @@ public class producer_consumer {
                     }
                     SalesRecord rec = buffer[out];
                     out = (out + 1) % BUFFER_SIZE;
-                    mutex.release(); // SEMAPHORE: release buffer lock
-                    empty.release(); // SEMAPHORE: signal empty slot available
+                    mutex.release(); // semaphore: release buffer lock
+                    empty.release(); // semaphore: signal empty slot available
 
                     // Update local statistics
                     localAggregate += rec.saleAmount;
@@ -184,10 +193,10 @@ public class producer_consumer {
                 }
             }
 
-            // ---- print local stats AFTER loop exits ----
+            // print local stats after loop exits 
             String[] months = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
             try {
-                statsMutex.acquire(); // SEMAPHORE: prevent interleaved printing
+                statsMutex.acquire(); // semaphore: prevent interleaved printing
                 System.out.println("\n--- Consumer " + consumerId + " Local Statistics ---");
                 System.out.println("Items consumed: " + itemsConsumed);
                 System.out.printf("Local aggregate: $%.2f%n", localAggregate);
