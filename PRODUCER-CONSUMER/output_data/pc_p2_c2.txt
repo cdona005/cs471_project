@@ -1,61 +1,61 @@
 Starting: 2 producers, 2 consumers, buffer size 10
 
 --- Consumer 2 Local Statistics ---
-Items consumed: 498
-Local aggregate: $255987.07
-  Store 1: $136827.20
-  Store 2: $119159.87
-  Jan: $18833.76
-  Feb: $15939.05
-  Mar: $18846.77
-  Apr: $23399.06
-  May: $28268.99
-  Jun: $27516.50
-  Jul: $28374.24
-  Aug: $19116.20
-  Sep: $18723.17
-  Oct: $21818.38
-  Nov: $12489.99
-  Dec: $22660.98
+Items consumed: 503
+Local aggregate: $247579.78
+  Store 1: $129633.98
+  Store 2: $117945.80
+  Jan: $19697.10
+  Feb: $24652.12
+  Mar: $23152.53
+  Apr: $22933.48
+  May: $17532.73
+  Jun: $20949.36
+  Jul: $20498.97
+  Aug: $19459.20
+  Sep: $18322.34
+  Oct: $16334.38
+  Nov: $22755.38
+  Dec: $21292.18
 
 --- Consumer 1 Local Statistics ---
-Items consumed: 502
-Local aggregate: $256611.86
-  Store 1: $118338.13
-  Store 2: $138273.73
-  Jan: $20695.64
-  Feb: $23213.81
-  Mar: $13722.80
-  Apr: $18615.05
-  May: $24070.32
-  Jun: $20912.57
-  Jul: $23582.51
-  Aug: $16038.44
-  Sep: $23642.58
-  Oct: $24348.03
-  Nov: $22668.79
-  Dec: $25101.31
+Items consumed: 497
+Local aggregate: $254081.41
+  Store 1: $115658.02
+  Store 2: $138423.39
+  Jan: $19506.53
+  Feb: $23610.05
+  Mar: $22116.70
+  Apr: $18262.26
+  May: $25948.11
+  Jun: $19194.68
+  Jul: $17369.32
+  Aug: $18328.59
+  Sep: $19328.31
+  Oct: $21627.68
+  Nov: $23690.63
+  Dec: $25098.56
 
 ========== Global Statistics ==========
 Producers: 2  |  Consumers: 2
 Total items produced:  1000
-Total simulation time: 12610 ms
-Aggregate sales:       $512598.92
+Total simulation time: 12599 ms
+Aggregate sales:       $501661.19
 
 Store-wide total sales:
-  Store 1: $255165.33
-  Store 2: $257433.60
+  Store 1: $245292.00
+  Store 2: $256369.19
 
 Month-wise total sales:
-  Jan: $39529.40
-  Feb: $39152.86
-  Mar: $32569.57
-  Apr: $42014.11
-  May: $52339.31
-  Jun: $48429.07
-  Jul: $51956.76
-  Aug: $35154.63
-  Sep: $42365.75
-  Oct: $46166.41
-  Nov: $35158.78
-  Dec: $47762.28
+  Jan: $39203.63
+  Feb: $48262.18
+  Mar: $45269.24
+  Apr: $41195.74
+  May: $43480.84
+  Jun: $40144.04
+  Jul: $37868.29
+  Aug: $37787.79
+  Sep: $37650.64
+  Oct: $37962.06
+  Nov: $46446.01
+  Dec: $46390.74
